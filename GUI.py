@@ -322,12 +322,12 @@ class MainPage:
         #     frac=1).reset_index(drop=True)
 
         # Shuffling the normalized dataset
-        self.dataset_normalized_df_with_label = self.dataset_normalized_df_with_label.sample(
-            frac=1).reset_index(drop=True)
-        self.train_dataset_normalized_df_with_label = self.train_dataset_normalized_df_with_label.sample(
-            frac=1).reset_index(drop=True)
-        self.test_dataset_normalized_df_with_label = self.test_dataset_normalized_df_with_label.sample(
-            frac=1).reset_index(drop=True)
+        # self.dataset_normalized_df_with_label = self.dataset_normalized_df_with_label.sample(
+        #     frac=1).reset_index(drop=True)
+        # self.train_dataset_normalized_df_with_label = self.train_dataset_normalized_df_with_label.sample(
+        #     frac=1).reset_index(drop=True)
+        # self.test_dataset_normalized_df_with_label = self.test_dataset_normalized_df_with_label.sample(
+        #     frac=1).reset_index(drop=True)
 
         # Export dataframe
         dataset_df_filename = "dataset_df.xlsx"
@@ -420,7 +420,7 @@ class MainPage:
                       'Gen 3 disconnected, high load',
                       'Gen 3 disconnected, low load',
                       'Line 5-6 disconnected, high load',
-                      'Line 5-6 disconnected, high load']
+                      'Line 5-6 disconnected, low load']
 
         for j in range(0, self.n_cases):
             for i in range(0, self.n_bus):
@@ -453,7 +453,7 @@ class MainPage:
         print('k for k-means: ', self.k_kmeans)
 
         self.x_set = self.dataset_normalized_df_with_label.drop(['os_label'], axis=1).to_numpy()
-        self.clusterization = KMeans(k=self.k_kmeans, max_iteration=200)
+        self.clusterization = KMeans(k=self.k_kmeans, max_iteration=300)
         y_pred = self.clusterization.predict(self.x_set)
         print('Clustering result: \n', self.clusterization.clusters)
 
