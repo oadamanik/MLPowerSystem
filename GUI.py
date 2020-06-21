@@ -273,26 +273,6 @@ class MainPage:
         coeff_train = 0.8
         n_train = int(coeff_train * self.n_time_steps)
 
-        # Not normalized training set
-        # self.train_dataset_df_with_label = pd.concat(
-        #     [self.dataset_df_with_label[:n_train],
-        #      self.dataset_df_with_label[self.n_time_steps:n_train + self.n_time_steps],
-        #      self.dataset_df_with_label[2 * self.n_time_steps:n_train + 2 * self.n_time_steps],
-        #      self.dataset_df_with_label[3 * self.n_time_steps:n_train + 3 * self.n_time_steps],
-        #      self.dataset_df_with_label[4 * self.n_time_steps:n_train + 4 * self.n_time_steps],
-        #      self.dataset_df_with_label[5 * self.n_time_steps:n_train + 5 * self.n_time_steps]],
-        #     axis=0, ignore_index=True)
-        #
-        # Not normalized test set
-        # self.test_dataset_df_with_label = pd.concat(
-        #     [self.dataset_df_with_label[n_train:self.n_time_steps],
-        #      self.dataset_df_with_label[n_train + self.n_time_steps:2 * self.n_time_steps],
-        #      self.dataset_df_with_label[n_train + 2 * self.n_time_steps:3 * self.n_time_steps],
-        #      self.dataset_df_with_label[n_train + 3 * self.n_time_steps:4 * self.n_time_steps],
-        #      self.dataset_df_with_label[n_train + 4 * self.n_time_steps:5 * self.n_time_steps],
-        #      self.dataset_df_with_label[n_train + 5 * self.n_time_steps:6 * self.n_time_steps]],
-        #     axis=0, ignore_index=True)
-
         # Normalized training set
         self.train_dataset_normalized_df_with_label = pd.concat(
             [self.dataset_normalized_df_with_label[:n_train],
@@ -312,14 +292,6 @@ class MainPage:
              self.dataset_normalized_df_with_label[n_train + 4 * self.n_time_steps:5 * self.n_time_steps],
              self.dataset_normalized_df_with_label[n_train + 5 * self.n_time_steps:6 * self.n_time_steps]],
             axis=0, ignore_index=True)
-
-        # Shuffling the not normalized dataset
-        # self.dataset_df_with_label = self.dataset_df_with_label.sample(
-        #     frac=1).reset_index(drop=True)
-        # self.train_dataset_df_with_label = self.train_dataset_df_with_label.sample(
-        #     frac=1).reset_index(drop=True)
-        # self.test_dataset_df_with_label = self.test_dataset_df_with_label.sample(
-        #     frac=1).reset_index(drop=True)
 
         # Shuffling the normalized dataset
         # self.dataset_normalized_df_with_label = self.dataset_normalized_df_with_label.sample(
@@ -383,7 +355,7 @@ class MainPage:
                                          font=("Arial", "10"))
         self.k_nn_title_label.place(relheight=0.05, relwidth=1, relx=0.0, rely=0.55)
 
-        self.k_nn_label = Label(self.frame, text='Insert the number of clusters k',
+        self.k_nn_label = Label(self.frame, text='Insert the number of k nearest neighbors',
                                    font=("Arial", "10"))
         self.k_nn_label.place(relheight=0.05, relwidth=0.75, relx=0.0, rely=0.60)
 
@@ -463,14 +435,7 @@ class MainPage:
 
     def knn(self):
         self.k_knn = int(self.k_nn_entry.get())
-        print('k for k-means: ', self.k_knn)
-
-        # # Create the training set, not normalized
-        # x_train = self.train_dataset_df_with_label.drop(['os_label'], axis=1).to_numpy()
-        # y_train = self.train_dataset_df_with_label['os_label'].to_numpy()
-        # # Create the test set, not normalized
-        # x_test = self.test_dataset_df_with_label.drop(['os_label'], axis=1).to_numpy()
-        # y_test = self.test_dataset_df_with_label['os_label'].to_numpy()
+        print('k for kNN classification: ', self.k_knn)
 
         # Create the training set for normalized
         x_train = self.train_dataset_normalized_df_with_label.drop(['os_label'], axis=1).to_numpy()
