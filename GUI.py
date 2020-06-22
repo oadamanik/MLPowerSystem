@@ -400,8 +400,8 @@ class MainPage:
                 box = ax[j].get_position()
                 ax[j].set_position([-0.075, box.y0, box.width, box.height])
                 ax[j].set_title(title_list[j])
-                ax[j].set_xlabel('Voltage')
-                ax[j].set_ylabel('Angle')
+                ax[j].set_xlabel('Voltage (p.u.)')
+                ax[j].set_ylabel('Angle (deg.)')
 
         handles, labels = ax[0].get_legend_handles_labels()
         self.fig.legend(handles, labels, loc='center left',
